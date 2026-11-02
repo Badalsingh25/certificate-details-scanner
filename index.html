@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#ffffff">
+<title>Certificate Details</title>
+<style>
+:root{--green:#35c98d;--green-dark:#4b9f83;--blue:#1598cf;--ink:#242a35;--muted:#686d75}
+*{box-sizing:border-box}
+body{margin:0;background:#fff;color:var(--ink);font-family:Arial,Helvetica,sans-serif;min-height:100vh}
+button{font:inherit;cursor:pointer}
+.screen{display:none;min-height:100vh;padding:24px 18px 42px}
+.screen.active{display:flex;flex-direction:column;align-items:center}
+.home{justify-content:flex-start;text-align:center;padding-top:42px}
+.illustration{width:min(230px,62vw);height:210px;margin:0 auto 12px;display:grid;place-items:center}
+h1{font-size:clamp(23px,5vw,30px);line-height:1.2;margin:4px 0 20px;font-weight:700}
+.brand-mark{width:174px;height:174px;margin:0 auto 34px}
+.primary{border:0;color:white;font-weight:700;font-size:21px;border-radius:6px;background:linear-gradient(105deg,#2ed58f,#4ca184);padding:18px 22px;min-height:64px;width:min(360px,88vw);box-shadow:0 1px 2px #00000012}
+.primary:active{transform:translateY(1px)}
+.scan-screen{padding-top:26px;justify-content:flex-start}
+.scan-title{font-size:24px;margin:8px 0 20px;text-align:center}
+#reader{width:min(100%,520px);overflow:hidden;border-radius:10px;background:#111;min-height:280px}
+#reader video{object-fit:cover}
+.scan-help{color:var(--muted);font-size:14px;line-height:1.5;text-align:center;max-width:440px;margin:16px auto}
+.back{margin-top:30px;width:min(210px,70vw);min-height:54px;font-size:18px}
+.upload-label{margin-top:14px;color:#168ac0;text-decoration:underline;font-size:15px;cursor:pointer}
+#qr-file{display:none}
+.result{padding-top:22px}
+.status-icon{width:112px;height:112px;border-radius:50%;background:#80c5aa;border:10px solid #edf8f4;display:grid;place-items:center;margin:0 auto 24px}
+.status-icon svg{width:52px;height:52px}
+.status{color:#4b9f83;font-size:20px;font-weight:700;text-align:center;margin:0 0 44px}
+.rule{width:84px;height:4px;background:linear-gradient(90deg,#58b2e7,#2479b3);border-radius:4px;margin:0 auto 24px}
+h2{font-size:clamp(25px,5vw,34px);letter-spacing:.5px;text-align:center;margin:0 0 24px}
+.rule.wide{width:128px;margin-bottom:34px}
+.details{width:min(100%,520px);border-radius:13px;overflow:hidden;box-shadow:0 4px 18px #00000012;border:1px solid #f0f0f0}
+.detail-row{display:grid;grid-template-columns:42% 58%;border-bottom:1px solid #e5e7eb}
+.detail-row:last-child{border-bottom:0}
+.label,.value{padding:20px 16px;font-size:17px;line-height:1.35;overflow-wrap:anywhere}
+.label{background:#f7f8fa;font-weight:700}
+.value{color:#62666c}
+.notice{width:min(100%,520px);font-size:12px;line-height:1.45;color:#777;text-align:center;margin:17px auto 0}
+.verify-again{margin-top:28px;width:min(100%,410px);background:linear-gradient(100deg,#55b8eb,#4c64cf);font-size:20px;line-height:1.25;min-height:78px}
+.error{display:none;color:#a22;text-align:center;font-size:14px;line-height:1.45;margin:14px auto;max-width:440px}
+@media(max-width:430px){
+ .screen{padding-left:14px;padding-right:14px}
+ .home{padding-top:35px}
+ .illustration{height:190px}
+ .brand-mark{width:158px;height:158px;margin-bottom:30px}
+ .label,.value{padding:17px 12px;font-size:15px}
+ .detail-row{grid-template-columns:41% 59%}
+ .status{margin-bottom:36px}
+}
+</style>
+</head>
+<body>
+<section id="home" class="screen home active">
+  <div class="illustration" aria-hidden="true">
+    <svg viewBox="0 0 240 210" width="100%" height="100%">
+      <circle cx="120" cy="95" r="91" fill="#f5fbfa"/>
+      <path d="M64 48l90 28 9 91-91-29z" fill="#fff" stroke="#cce7f3" stroke-width="4"/>
+      <path d="M82 67l34 11M82 84l52 16M82 98l46 14M82 112l37 12" stroke="#3986a8" stroke-width="5" stroke-linecap="round"/>
+      <path d="M158 77l28-18v94l-23 15" fill="#f8ffff" stroke="#b7dfeb" stroke-width="3"/>
+      <circle cx="66" cy="120" r="26" fill="#83c9ae" stroke="#e8f7f1" stroke-width="8"/>
+      <path d="M54 120l8 8 17-19" fill="none" stroke="white" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M177 108h20v20h-20zM183 114h8v8h-8z" fill="none" stroke="#b8e8d8" stroke-width="3"/>
+    </svg>
+  </div>
+  <h1>Certificate Details</h1>
+  <svg class="brand-mark" viewBox="0 0 180 180" aria-label="Abstract blue certificate mark">
+    <circle cx="90" cy="90" r="88" fill="#08a8df"/>
+    <path d="M12 75c28-9 34 9 49 35 10 18 19 24 30 1 8-17 13-17 18-2 6 17 15 16 26-4 11-20 22-30 39-30v23c-11 0-17 7-25 22-20 37-43 37-56 11-15 29-37 29-55-1C25 104 20 96 12 97z" fill="white"/>
+  </svg>
+  <button id="start-scan" class="primary">Scan QR code　▦</button>
+</section>
+
+<section id="scanner" class="screen scan-screen">
+  <h1 class="scan-title">Scan Certificate QR Code</h1>
+  <div id="reader"></div>
+  <p class="scan-help">Allow camera access and position the QR code inside the scanner. Use the rear camera where available.</p>
+  <p id="scan-error" class="error"></p>
+  <button id="back-home" class="primary back">BACK</button>
+  <label class="upload-label" for="qr-file">Or choose a QR image</label>
+  <input id="qr-file" type="file" accept="image/*">
+</section>
+
+<section id="result" class="screen result">
+  <div class="status-icon" aria-hidden="true">
+    <svg viewBox="0 0 60 60"><path d="M12 31l12 12L49 17" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </div>
+  <p class="status">Certificate Details Retrieved</p>
+  <div class="rule"></div>
+  <h2>CERTIFICATE DETAILS</h2>
+  <div class="rule wide"></div>
+  <div class="details">
+    <div class="detail-row"><div class="label">Issued To</div><div id="issued-to" class="value"></div></div>
+    <div class="detail-row"><div class="label">Event Name</div><div id="event-name" class="value"></div></div>
+    <div class="detail-row"><div class="label">Start Date</div><div id="start-date" class="value"></div></div>
+    <div class="detail-row"><div class="label">End Date</div><div id="end-date" class="value"></div></div>
+    <div class="detail-row"><div class="label">Issuance Date</div><div id="issuance-date" class="value"></div></div>
+  </div>
+  <p id="certificate-id" class="notice"></p>
+  <p class="notice">This page displays information encoded in the scanned QR code. It is not connected to the certificate issuer and does not independently authenticate the certificate.</p>
+  <button id="verify-another" class="primary verify-again">Verify Another<br>Certificate</button>
+</section>
+
+<script src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
+<script>
+const screens = ["home","scanner","result"];
+let scanner = null;
+let scanning = false;
+const $ = id => document.getElementById(id);
+
+function showScreen(name){
+  screens.forEach(id => $(id).classList.toggle("active", id === name));
+}
+function setError(message){
+  $("scan-error").textContent = message;
+  $("scan-error").style.display = "block";
+}
+function clearError(){
+  $("scan-error").textContent = "";
+  $("scan-error").style.display = "none";
+}
+function renderCertificate(data){
+  const required = ["issuedTo","eventName","startDate","endDate","issuanceDate"];
+  if (!data || data.type !== "certificate-details" || !required.every(k => typeof data[k] === "string" && data[k].trim())) {
+    throw new Error("This QR code does not contain certificate details in the expected format. Please scan the sample certificate QR supplied with this website.");
+  }
+  $("issued-to").textContent = data.issuedTo;
+  $("event-name").textContent = data.eventName;
+  $("start-date").textContent = data.startDate;
+  $("end-date").textContent = data.endDate;
+  $("issuance-date").textContent = data.issuanceDate;
+  $("certificate-id").textContent = data.certificateId ? "Certificate ID: " + data.certificateId : "";
+}
+async function stopScanner(){
+  if (scanner && scanning) {
+    try { await scanner.stop(); } catch(e) {}
+    scanning = false;
+  }
+}
+async function startScanner(){
+  clearError();
+  showScreen("scanner");
+  if (!window.Html5Qrcode) {
+    setError("The scanner library could not load. Check your internet connection and reload the page.");
+    return;
+  }
+  try {
+    if (!scanner) scanner = new Html5Qrcode("reader");
+    await scanner.start(
+      { facingMode: "environment" },
+      { fps: 10, qrbox: (w,h) => ({ width: Math.min(w*0.78, 280), height: Math.min(h*0.55, 280) }) },
+      async decodedText => {
+        if (!scanning) return;
+        scanning = false;
+        try { await scanner.stop(); } catch(e) {}
+        try {
+          const data = JSON.parse(decodedText);
+          renderCertificate(data);
+          showScreen("result");
+        } catch(err) {
+          showScreen("scanner");
+          setError(err.message || "Unable to read certificate details from this QR code.");
+          scanning = false;
+        }
+      },
+      () => {}
+    );
+    scanning = true;
+  } catch(err) {
+    setError("Camera access was not available. Allow camera permission in your browser, and make sure this website is opened using HTTPS. You can also choose a QR image below.");
+  }
+}
+$("start-scan").addEventListener("click", startScanner);
+$("back-home").addEventListener("click", async () => { await stopScanner(); showScreen("home"); });
+$("verify-another").addEventListener("click", async () => { await stopScanner(); startScanner(); });
+$("qr-file").addEventListener("change", async event => {
+  const file = event.target.files && event.target.files[0];
+  if (!file || !scanner) return;
+  try {
+    const decoded = await scanner.scanFile(file, true);
+    const data = JSON.parse(decoded);
+    renderCertificate(data);
+    showScreen("result");
+  } catch(err) {
+    setError(err.message || "Could not read a valid certificate QR code from that image.");
+  } finally {
+    event.target.value = "";
+  }
+});
+</script>
+</body>
+</html>
