@@ -99,8 +99,6 @@ h2{font-size:clamp(25px,5vw,34px);letter-spacing:.5px;text-align:center;margin:0
     <div class="detail-row"><div class="label">End Date</div><div id="end-date" class="value"></div></div>
     <div class="detail-row"><div class="label">Issuance Date</div><div id="issuance-date" class="value"></div></div>
   </div>
-  <p id="certificate-id" class="notice"></p>
-  <p class="notice">This page displays information encoded in the scanned QR code. It is not connected to the certificate issuer and does not independently authenticate the certificate.</p>
   <button id="verify-another" class="primary verify-again">Verify Another<br>Certificate</button>
 </section>
 
@@ -132,7 +130,6 @@ function renderCertificate(data){
   $("start-date").textContent = data.startDate;
   $("end-date").textContent = data.endDate;
   $("issuance-date").textContent = data.issuanceDate;
-  $("certificate-id").textContent = data.certificateId ? "Certificate ID: " + data.certificateId : "";
 }
 async function stopScanner(){
   if (scanner && scanning) {
